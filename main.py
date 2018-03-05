@@ -1,3 +1,5 @@
+#!/usr/bin/python
+
 ### Traffic Restriction Predictor ###
 ### Author: Manuel Alejandro Beltran ###
 ### Date: Mar 3rd, 2018 ###
@@ -53,7 +55,7 @@ class trafficRestriction: #Restriction validator
 
 ## Main program
 while looper == True:
-    print "TRAFFIC RESTRICTION PREDICTOR \nThis application will let you know if your car is allowed for circulation based on the License Plate and an specific date you are planning to drive \nLet's get started \n"
+    print "\nTRAFFIC RESTRICTION PREDICTOR \nThis application will let you know if your car is allowed for circulation based on the License Plate and an specific date you are planning to drive \nLet's get started \n"
     
     ## Input checker
     while True:
