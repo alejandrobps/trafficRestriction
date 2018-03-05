@@ -1,10 +1,12 @@
 ### Traffic Restriction Predictor ###
 ### Author: Manuel Alejandro Beltran ###
 ### Date: Mar 3rd, 2018 ###
+# The "Pico y Placa" is a traffic restriction system that operates in the city of Quito. It restricts cars from circulation depending on the last digit of the license plate in an specific day of the week from the time slots 7:00 to 9:30 and 16:00 to 19:30. On Monday the cars terminating their license plate on 1 & 2 are restricted, Tuesday for 3 & 4, Wednesday 5 & 6, Thursday 7 & 8 and Friday 9 & 0. Weekends all cars are allowed to transit.
 
 ## Libraries
 import datetime
 import time
+import unittest
 
 ## Global vars
 looper = True
@@ -13,44 +15,37 @@ looperval = 0
 ## Global functions
         
 ## Global classes
-class licensePlate:
+class licensePlate: #Customer's license plate
     def __init__(self, plateString):
         self.plateId = plateString
     
     def findLastDigit(self):
         return self.plateId[-1]
         
-        
-class trafficRestriction:
+class trafficRestriction: #Restriction validator
     def __init__(self, lastDigit, ddt):
         self.digit = int(lastDigit)
         self.driveDateTime = ddt
         self.driveTime = datetime.timedelta(hours= int(ddt.timetuple()[3]), minutes= int(ddt.timetuple()[4]))
-        #print "\nTesting time aquired: ", self.driveTime
         self.dow = int(ddt.timetuple()[6])
         
-    def trafficRestrictionDay(self):
+    def trafficRestrictionDay(self): #checks if the day presents a restriction for the customer. This method returns 1 if there's a restriction, 0 when is allowed to drive on that day.
         if self.digit in range(1,3) and self.dow == 0:
-            #print "Match 1 or 2"
             return 1
         elif self.digit in range(3,5) and self.dow == 1:
-            #print "Match 3 or 4"
             return 1
         elif self.digit in range(5,7) and self.dow == 3:
-            #print "Match 5 or 6"
             return 1
         elif self.digit in range(7,9) and self.dow == 4:
-            #print "Match 7 or 8"
             return 1
         elif self.digit == 9 and self.dow == 5:
             return 1
         elif self.digit == 0 and self.dow == 5:
             return 1
         else:
-            #print "Did not match"
             return 0
 
-    def trafficRestrictionTime(self):
+    def trafficRestrictionTime(self): #checks if the time presents a restriction for the customer. This method returns 1 if there's a restriction, 0 when is within the allowed time slots.
         if datetime.timedelta(hours=7, minutes=0) <= self.driveTime < datetime.timedelta(hours=9, minutes=30) or datetime.timedelta(hours=16, minutes=0) <= self.driveTime < datetime.timedelta(hours=19, minutes=30):
             return 1
         else:
@@ -121,6 +116,7 @@ while looper == True:
         print "OK: You can drive :)"
     print "\n\n\n"
     
+    ## Carry on looper
     print "Further options\nIf you wish to continue checking, enter yes or any key.\n"
     looperval = raw_input("Do you wish to continue? [yes/no] ")
     if len(looperval) != 0:
@@ -132,3 +128,4 @@ while looper == True:
     time.sleep(1)
     print "\n\n\n\n"
     
+    ### End of the program
