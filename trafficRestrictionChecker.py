@@ -32,9 +32,7 @@ class trafficRestriction: #Restriction validator
             return 1
         elif self.digit in range(7,9) and self.dow == 3:
             return 1
-        elif self.digit == 9 and self.dow == 4:
-            return 1
-        elif self.digit == 0 and self.dow == 4:
+        elif self.digit in [9,0] and self.dow == 4:
             return 1
         else:
             return 0
