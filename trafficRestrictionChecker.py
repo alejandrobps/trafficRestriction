@@ -14,7 +14,7 @@ class licensePlate: #Customer's license plate
         self.plateId = plateString
     
     def findLastDigit(self):
-        return self.plateId[-1]
+        return int(self.plateId[-1])
         
 class trafficRestriction: #Restriction validator
     def __init__(self, lastDigit, ddt):
@@ -28,13 +28,13 @@ class trafficRestriction: #Restriction validator
             return 1
         elif self.digit in range(3,5) and self.dow == 1:
             return 1
-        elif self.digit in range(5,7) and self.dow == 3:
+        elif self.digit in range(5,7) and self.dow == 2:
             return 1
-        elif self.digit in range(7,9) and self.dow == 4:
+        elif self.digit in range(7,9) and self.dow == 3:
             return 1
-        elif self.digit == 9 and self.dow == 5:
+        elif self.digit == 9 and self.dow == 4:
             return 1
-        elif self.digit == 0 and self.dow == 5:
+        elif self.digit == 0 and self.dow == 4:
             return 1
         else:
             return 0
