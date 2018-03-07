@@ -44,7 +44,6 @@ class trafficRestriction: #Restriction validator
             return 0
 
 ### Traffic Restriction Checker function
-## checkTrafficRestriction(arg1_str, arg2_datetime): returns boolean 0 means allowed, 1 means restricted
 def checkTrafficRestriction(licensePlateID, driveDateTime):
     
     ## Objects creation
@@ -60,5 +59,4 @@ def checkTrafficRestriction(licensePlateID, driveDateTime):
         else:
             return 0
     else:
-        return 0    
-### End of function
+        return 0

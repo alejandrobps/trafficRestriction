@@ -14,45 +14,6 @@ import trafficRestrictionChecker
 looper = True
 looperval = 0
 
-### Global functions
-#        
-### Global classes
-#class licensePlate: #Customer's license plate
-#    def __init__(self, plateString):
-#        self.plateId = plateString
-#    
-#    def findLastDigit(self):
-#        return self.plateId[-1]
-#        
-#class trafficRestriction: #Restriction validator
-#    def __init__(self, lastDigit, ddt):
-#        self.digit = int(lastDigit)
-#        self.driveDateTime = ddt
-#        self.driveTime = datetime.timedelta(hours= int(ddt.timetuple()[3]), minutes= int(ddt.timetuple()[4]))
-#        self.dow = int(ddt.timetuple()[6])
-#        
-#    def trafficRestrictionDay(self): #checks if the day presents a restriction for the customer. This method returns 1 if there's a restriction, 0 when is allowed to drive on that day.
-#        if self.digit in range(1,3) and self.dow == 0:
-#            return 1
-#        elif self.digit in range(3,5) and self.dow == 1:
-#            return 1
-#        elif self.digit in range(5,7) and self.dow == 3:
-#            return 1
-#        elif self.digit in range(7,9) and self.dow == 4:
-#            return 1
-#        elif self.digit == 9 and self.dow == 5:
-#            return 1
-#        elif self.digit == 0 and self.dow == 5:
-#            return 1
-#        else:
-#            return 0
-#
-#    def trafficRestrictionTime(self): #checks if the time presents a restriction for the customer. This method returns 1 if there's a restriction, 0 when is within the allowed time slots.
-#        if datetime.timedelta(hours=7, minutes=0) <= self.driveTime < datetime.timedelta(hours=9, minutes=30) or datetime.timedelta(hours=16, minutes=0) <= self.driveTime < datetime.timedelta(hours=19, minutes=30):
-#            return 1
-#        else:
-#            return 0
-
 ## Main program
 while looper == True:
     print "\nTRAFFIC RESTRICTION PREDICTOR \nThis application will let you know if your car is allowed for circulation based on the License Plate and an specific date you are planning to drive \nLet's get started \n"
@@ -64,9 +25,9 @@ while looper == True:
             if licensePlateId[3:].isdigit() and not licensePlateId[0].isdigit() and not licensePlateId[1].isdigit() and not licensePlateId[2].isdigit(): # Not validated for special characters, though. Next phase will support this feature.
                 break
             else:
-                print "Wrong entry, the format used should be AAA1234"
+                print "Wrong entry, the format used should be ABC1234"
         else:
-            print "Wrong entry, the format used should be AAA1234"
+            print "Wrong entry, the format used should be ABC1234"
    
     while True:
         dateToDrive = str(raw_input("Enter the date you plan to drive. I.e. DD/MM/YYYY : "))
@@ -96,13 +57,9 @@ while looper == True:
         else:
             print "Wrong entry, the format used should be HH:MM."
             
-    ## Populate variables
     driveDateTime = datetime.datetime(int(dateToDrive[6:10]),int(dateToDrive[3:5]),int(dateToDrive[0:2]),int(timeToDrive[0:2]),int(timeToDrive[-2:]))
-    
     print "Processing, please wait...\n\n"
     time.sleep(1)
-    
-    #### Here the new code
     print "The car with license plate:", licensePlateId, ", planning to drive on:", driveDateTime
     drivingAllowed = trafficRestrictionChecker.checkTrafficRestriction(licensePlateId, driveDateTime)
     if drivingAllowed == 0:
@@ -110,27 +67,8 @@ while looper == True:
     else:
         print "RESULT:\tWARNING! Your car is restricted for circulation :(\n\n\n"        
     time.sleep(3)
-
-    #### End new code
-    
-#    ## Objects creation
-#    customerLP = licensePlate(licensePlateId)
-#    restrictionCheck = trafficRestriction(customerLP.findLastDigit(), driveDateTime)
-#    
-#    ## Core program, traffic restriction validation
-#    isRestrictedDay = restrictionCheck.trafficRestrictionDay()
-#    if isRestrictedDay == 1:
-#        isRestrictedTime = restrictionCheck.trafficRestrictionTime()
-#        if isRestrictedTime == 1:
-#            print "WARNING: Your car is restricted for circulation :(\n"
-#        else:
-#            print "OK: You can drive :)"
-#    else:
-#        print "OK: You can drive :)"
-#    print "\n\n\n"
     
     ## Carry on looper
-#   print "Further options\nIf you wish to continue checking, enter yes or any key."
     looperval = raw_input("Do you wish to continue checking? [yes/no] ")
     if len(looperval) != 0:
         if str(looperval) == "no" or str(looperval) == "n" or str(looperval) == "No" or str(looperval) == "NO" or str(looperval) == "N" or str(looperval) == "nO":
@@ -141,4 +79,4 @@ while looper == True:
     time.sleep(1)
     print "\n\n\n\n"
     
-    ### End of the program
+### End of the program
